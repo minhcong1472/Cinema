@@ -46,7 +46,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN','')");
 		// Pages only for ADMIN
 		http.authorizeRequests()
-				.antMatchers("/admin/showtimes/add","/admin/showtimes","/admin/showtimes/delete/{id}","/admin/showtimes/update/{id}").access("hasRole('ROLE_ADMIN')");
+				.antMatchers("/admin/lichchieu/add","/admin/lichchieu","/admin/lichchieu/delete/{id}","/admin/lichchieu/update/{id}").access("hasRole('ROLE_ADMIN')");
 
 		http.authorizeRequests().antMatchers("/registration**", "/js/**", "/css/**", "/img/**").permitAll().anyRequest()
 				.authenticated().and().formLogin().loginPage("/login").permitAll().and().logout()
