@@ -1,0 +1,115 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+	<link href="../static/style.css" th:href="@{/style.css}"
+	rel="stylesheet" />
+    
+<!-- <link -->
+<!-- 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" -->
+<!-- 	rel="stylesheet" -->
+<!-- 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" -->
+<!-- 	crossorigin="anonymous" /> -->
+
+
+<title>Cinema</title>
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#" th:href="@{/}">Trang chủ</a>
+				<a class="navbar-brand" th:href="@{/logout}" Onclick="return ConfirmLogout();">Đăng xuất</a>
+				<a class="navbar-brand" href="#" th:href="@{/admin/}">Quản lý lịch chiếu</a>
+			</div>
+		</div>
+	</nav>
+	<br>
+	<br>
+	<br>
+
+	<div class="container">
+		<div align="center">
+			<h1>Lịch Chiếu Phim</h1>
+		</div>
+	</div>
+	<br>
+	<div class="container">
+		<div align="center">
+			<form th:action="@{/admin/lichchieu}" class="form-inline">
+				<input placeholder="Search" type="text" name="keyword"
+					th:value="${keyword}" required class="form-control mt-sm-2" />&nbsp;
+					
+				<input type="submit" value="Search" class="btn btn-primary" />
+				&nbsp; <input type="button" value="Clear search"
+					onclick="clearFilter()" class="btn btn-primary" />
+			</form>
+		</div>
+	</div>
+	<br>
+	<div class="container-fluid">
+		<div class="table-responsive">
+			
+			<table class="table table-bordered table-hover"  >
+				<thead class="thead-light">
+					<tr>
+						<th scope="col">STT</th>
+						<th scope="col">Tên Phim</th>
+						<th scope="col">Tên Phòng</th>
+						<th scope="col">Ảnh xem trước</th>
+						<th scope="col">Thời Gian Bắt Đầu</th>
+						<th scope="col">Giá vé</th>
+						<th scope="col">Xóa</th>
+						<th scope="col">Sửa</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr th:each="lichchieu, iStat : ${lichchieu}">
+						<th scope="row" th:text="${iStat.index + 1}"></th>
+						<td th:text="${lichchieu.phim.ten}"></td>
+						<td th:text="${lichchieu.phong.ten}"></td>
+						<td><img src="" height="100px" width="130px"
+							th:src="@{${'/movieImages/' + lichchieu.phim.tenanh}}"></td>
+						<td th:text="${lichchieu.thoigianchieu}"></td>
+						<td th:text="${lichchieu.giave}"></td>
+
+						<td><a href=""
+							th:href="@{/admin/lichchieu/delete/{id}(id=${lichchieu.id})}"
+							class="btn btn-danger" Onclick="return ConfirmDelete();">Xóa</a></td>
+						<td><a href=""
+							th:href="@{/admin/lichchieu/update/{id}(id=${lichchieu.id})}"
+							class="btn btn-warning">Sửa</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<script>
+		function ConfirmDelete() {
+			var x = confirm("Bạn có chắc muốn xóa lịch chiếu này ?");
+			if (x)
+				return true;
+			else
+				return false;
+		}
+	</script>
+	<script type="text/javascript">
+		function clearFilter() {
+			window.location = '/admin/lichchieu';
+		}
+	</script>
+
+</body>
+</html>

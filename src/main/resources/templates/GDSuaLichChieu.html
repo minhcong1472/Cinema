@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+
+<title>Cinema</title>
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#" th:href="@{/}">Trang chủ</a> 
+				<a class="navbar-brand" th:href="@{/logout}" Onclick="return ConfirmLogout();">Đăng xuất</a>
+				<a class="navbar-brand" href="#" th:href="@{/admin/lichchieu}">Lịch
+					chiếu </a>
+			</div>
+		</div>
+	</nav>
+	<br>
+	<br>
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-6 col-md-offset-3">
+				<h3 align="center">Lịch chiếu phim</h3>
+				<form th:action="@{/admin/lichchieu/add}" method="post"
+					th:object="${lichChieuDTO}" enctype="multipart/form-data">
+
+
+					<input type="hidden" name="id" th:field="*{id}">
+					
+					<div class="form-group">
+						<label for="giave">Giá vé</label> <input type="number"
+							class="form-control" required th:field="*{giave}" name="giave"
+							id="giave" placeholder="giave">
+					</div>
+
+					<div class="form-group">
+						<label for="thoigianchieu">Thời Gian Bắt Đầu</label> <input type="datetime-local"
+							class="form-control" required th:field="*{thoigianchieu}" name="thoigianchieu"
+							id="thoigianchieu" placeholder="thoigianchieu">
+
+					</div>
+
+					<div class="form-group">
+						<label for="phim">Chọn Phim</label> <select class="form-control"
+							th:field="*{phimId}" id="phim" name="phim">
+							<option th:each="phim :${phims}" th:value="${phim.id}"
+								th:text="${phim.ten}">
+						</select>
+					</div>
+
+					<div class="form-group">
+						<label for="phong">Chọn Phòng</label> <select class="form-control"
+							th:field="*{phongId}" id="phong" name="phong">
+							<option th:each="phong :${phongs}" th:value="${phong.id}"
+								th:text="${phong.ten}">
+						</select>
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-success">Sửa</button>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+	
+</body>
+</html>
