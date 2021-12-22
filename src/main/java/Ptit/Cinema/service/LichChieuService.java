@@ -20,6 +20,12 @@ public class LichChieuService {
 	}
 		return lichchieuRepository.findAll();
 	}
+//	public List<LichChieu> getAllLichChieuLC(Double key) {
+//		if (key != null) {
+//			return lichchieuRepository.findAllLC(key);
+//		}
+//		return lichchieuRepository.findAll();
+//	}
 	
 	public void saveShowTimes(LichChieu lichchieu) {
 		lichchieuRepository.save(lichchieu);
