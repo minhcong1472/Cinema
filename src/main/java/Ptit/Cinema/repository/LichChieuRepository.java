@@ -14,5 +14,6 @@ public interface LichChieuRepository extends JpaRepository<LichChieu, Integer> {
 	@Query(value = "SELECT l FROM LichChieu l WHERE l.phong.ten LIKE %?1%"
 			+ "OR l.phim.ten LIKE %?1%")
 	public List<LichChieu> findAll(String keyword);
-	
+//	@Query(value = "SELECT l FROM LichChieu l WHERE l.giave = ?1")
+//	public List<LichChieu> findAllLC(Double key);
 }
