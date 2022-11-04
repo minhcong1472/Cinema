@@ -6,14 +6,8 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
 	crossorigin="anonymous">
-	<link href="../static/style.css" th:href="@{/style.css}"
+<link href="../static/style.css" th:href="@{/style.css}"
 	rel="stylesheet" />
-    
-<!-- <link -->
-<!-- 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" -->
-<!-- 	rel="stylesheet" -->
-<!-- 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" -->
-<!-- 	crossorigin="anonymous" /> -->
 
 
 <title>Cinema</title>
@@ -29,9 +23,11 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#" th:href="@{/}">Trang chủ</a>
-				<a class="navbar-brand" th:href="@{/logout}" Onclick="return ConfirmLogout();">Đăng xuất</a>
-				<a class="navbar-brand" href="#" th:href="@{/admin/}">Quản lý lịch chiếu</a>
+				<a class="navbar-brand" href="#" th:href="@{/}">Trang chủ</a> <a
+					class="navbar-brand" th:href="@{/logout}"
+					Onclick="return ConfirmLogout();">Đăng xuất</a> <a
+					class="navbar-brand" href="#" th:href="@{/admin/}">Quản lý lịch
+					chiếu</a>
 			</div>
 		</div>
 	</nav>
@@ -50,18 +46,32 @@
 			<form th:action="@{/admin/lichchieu}" class="form-inline">
 				<input placeholder="Search" type="text" name="keyword"
 					th:value="${keyword}" required class="form-control mt-sm-2" />&nbsp;
-					
+
 				<input type="submit" value="Search" class="btn btn-primary" />
 				&nbsp; <input type="button" value="Clear search"
 					onclick="clearFilter()" class="btn btn-primary" />
 			</form>
 		</div>
 	</div>
+
 	<br>
 	<div class="container-fluid">
 		<div class="table-responsive">
-			
-			<table class="table table-bordered table-hover"  >
+
+			<table class="table table-bordered table-hover">
+				<div
+					style="text-align: center; font-size: 20px; color: rgb(0, 255, 0); font-weight: bold">
+					<span th:utext="${update_success}"></span>
+				</div>
+				<div
+					style="text-align: center; font-size: 20px; color: rgb(255, 0, 0); font-weight: bold">
+					<span th:utext="${id_notfound}"></span>
+				</div>
+				<div
+					style="text-align: center; font-size: 20px; color: rgb(255, 0, 0); font-weight: bold">
+					<span th:utext="${delete_fail}"></span>
+				</div>
+				
 				<thead class="thead-light">
 					<tr>
 						<th scope="col">STT</th>
@@ -69,6 +79,7 @@
 						<th scope="col">Tên Phòng</th>
 						<th scope="col">Ảnh xem trước</th>
 						<th scope="col">Thời Gian Bắt Đầu</th>
+						<th scope="col">Thời Gian Kết Thúc</th>
 						<th scope="col">Giá vé</th>
 						<th scope="col">Xóa</th>
 						<th scope="col">Sửa</th>
@@ -78,11 +89,13 @@
 
 					<tr th:each="lichchieu, iStat : ${lichchieu}">
 						<th scope="row" th:text="${iStat.index + 1}"></th>
+
 						<td th:text="${lichchieu.phim.ten}"></td>
 						<td th:text="${lichchieu.phong.ten}"></td>
 						<td><img src="" height="100px" width="130px"
 							th:src="@{${'/movieImages/' + lichchieu.phim.tenanh}}"></td>
 						<td th:text="${lichchieu.thoigianchieu}"></td>
+						<td th:text="${lichchieu.thoigianketthuc}"></td>
 						<td th:text="${lichchieu.giave}"></td>
 
 						<td><a href=""
@@ -105,6 +118,7 @@
 				return false;
 		}
 	</script>
+
 	<script type="text/javascript">
 		function clearFilter() {
 			window.location = '/admin/lichchieu';

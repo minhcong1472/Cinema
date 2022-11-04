@@ -21,9 +21,10 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#" th:href="@{/}">Trang chủ</a> 
-				<a class="navbar-brand" th:href="@{/logout}" Onclick="return ConfirmLogout();">Đăng xuất</a>
-				<a class="navbar-brand" href="#" th:href="@{/admin/lichchieu}">Lịch
+				<a class="navbar-brand" href="#" th:href="@{/}">Trang chủ</a> <a
+					class="navbar-brand" th:href="@{/logout}"
+					Onclick="return ConfirmLogout();">Đăng xuất</a> <a
+					class="navbar-brand" href="#" th:href="@{/admin/lichchieu}">Lịch
 					chiếu </a>
 			</div>
 		</div>
@@ -36,11 +37,26 @@
 			<div class="col-md-6 col-md-offset-3">
 				<h3 align="center">Lịch chiếu phim</h3>
 				<form th:action="@{/admin/lichchieu/add}" method="post"
-					th:object="${lichChieuDTO}" enctype="multipart/form-data">
+					th:object="${lichChieuDTO}">
+					
+					<div
+						style="text-align: center; font-size: 20px; color: rgb(0, 0, 0); font-weight: bold">
+						<span th:utext="${update_notchange}"></span>
+					</div>
+
+					<div
+						style="text-align: center; font-size: 20px; color: rgb(0, 0, 0); font-weight: bold">
+						<span th:utext="${update_fail}"></span>
+					</div>
+					
+					<div
+						style="text-align: center; font-size: 20px; color: rgb(0, 0, 0); font-weight: bold">
+						<span th:utext="${update_fail2}"></span>
+					</div>
 
 
 					<input type="hidden" name="id" th:field="*{id}">
-					
+
 					<div class="form-group">
 						<label for="giave">Giá vé</label> <input type="number"
 							class="form-control" required th:field="*{giave}" name="giave"
@@ -48,10 +64,18 @@
 					</div>
 
 					<div class="form-group">
-						<label for="thoigianchieu">Thời Gian Bắt Đầu</label> <input type="datetime-local"
-							class="form-control" required th:field="*{thoigianchieu}" name="thoigianchieu"
+						<label for="thoigianchieu">Thời Gian Bắt Đầu</label> <input
+							type="datetime" class="form-control" required
+							th:field="*{thoigianchieu}" name="thoigianchieu"
 							id="thoigianchieu" placeholder="thoigianchieu">
 
+					</div>
+
+					<div class="form-group">
+						<label for="thoigianketthuc">Thời Gian Kết Thúc</label> <input
+							type="datetime" class="form-control"
+							th:field="*{thoigianketthuc}" id="thoigianketthuc"
+							name="thoigianketthuc" placeholder="thoigianketthuc" required>
 					</div>
 
 					<div class="form-group">
@@ -70,13 +94,19 @@
 						</select>
 					</div>
 					<div class="form-group">
-						<button type="submit" class="btn btn-success">Sửa</button>
+						<button type="submit" class="btn btn-success ">Sửa</button>
 					</div>
 
 				</form>
 			</div>
 		</div>
 	</div>
-	
+	<script type="text/javascript">
+		function validateForm() {
+			alert("Sửa lịch chiếu thành công!")
+			return true;
+		}
+	</script>
+
 </body>
 </html>

@@ -1,5 +1,8 @@
 package Ptit.Cinema.model;
 
+
+import java.sql.Time;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,5 +29,7 @@ public class Phim {
 	private String mota;
 
 	private String tenanh;
+	
+	private Time thoiluong;
 	
 }

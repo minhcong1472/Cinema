@@ -13,24 +13,24 @@ import Ptit.Cinema.repository.LichChieuRepository;
 public class LichChieuService {
 	@Autowired
 	LichChieuRepository lichchieuRepository;
-	
-	public List<LichChieu> getAllShowTimes(String keyword){
-		if(keyword!=null) {
+
+	public List<LichChieu> getAllLichChieu(String keyword) {
+		if (keyword != null) {
 			return lichchieuRepository.findAll(keyword);
-	}
+		}
 		return lichchieuRepository.findAll();
 	}
-	
-	public void saveShowTimes(LichChieu lichchieu) {
+
+	public void LuuCapNhat(LichChieu lichchieu) {
 		lichchieuRepository.save(lichchieu);
 	}
-	
+
 	public void removeShowTimes(int id) {
 		lichchieuRepository.deleteById(id);
 	}
-	public Optional<LichChieu> getShowTimesById(int id){
+
+	public Optional<LichChieu> getLichChieuTheoId(int id) {
 		return lichchieuRepository.findById(id);
 	}
 
-	
 }

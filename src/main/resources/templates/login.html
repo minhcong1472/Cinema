@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Book manager system</title>
+<title>Hệ thống quản lý rạp chiếu phim</title>
 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -23,7 +23,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#" th:href="@{/}">Cinema System</a>
+				<a class="navbar-brand" href="#" th:href="@{/}">Hệ thống rạp chiếu phim</a>
 			</div>
 		</div>
 	</nav>
@@ -34,27 +34,26 @@
 		<div class = "row">
 			<div class = "col-md-6 col-md-offset-3">
 				
-				<h1> Login Page </h1>
+				<h1> Trang Đăng Nhập</h1>
 				<form th:action="@{/login}" method="post">
 					
 					<div th:if="${param.error}">
-						<div class="alert alert-danger">Invalid username or
-							password.</div>
+						<div class="alert alert-danger">Sai tài khoản hoặc mật khẩu.</div>
 					</div>
 				
 					<!-- logout message -->
 					<div th:if="${param.logout}">
-						<div class="alert alert-info">You have logout.</div>
+						<div class="alert alert-info">Bạn đã đăng xuất.</div>
 					</div>
 					
 					<div class = "form-group">
-						<label for ="username"> Username </label> :
+						<label for ="username"> Email </label> :
 						<input type="text" class = "form-control" id ="username" name = "username"
 						placeholder="Enter Email ID" autofocus="autofocus">
 					</div>
 					
 					<div class="form-group">
-						<label for="password">Password</label>: <input type="password"
+						<label for="password">Mật Khẩu</label>: <input type="password"
 							id="password" name="password" class="form-control"
 							placeholder="Enter Password" />
 					</div>
@@ -63,7 +62,7 @@
 						<div class="row">
 							<div class="col-sm-6 col-sm-offset-3">
 								<input type="submit" name="login-submit" id="login-submit"
-									class="form-control btn btn-primary" value="Log In" />
+									class="form-control btn btn-primary" value="Đăng Nhập" />
 							</div>
 						</div>
 					</div>

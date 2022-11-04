@@ -11,19 +11,20 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import Ptit.Cinema.service.UserService;
+import Ptit.Cinema.service.NhanVienService;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	private UserService userService;
+	private NhanVienService userService;
 
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
+	
 
 	@Bean
 	public DaoAuthenticationProvider authenticationProvider() {
@@ -41,12 +42,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
-		// Requires login with role ROLE_USER or ROLE_ADMIN If not, it will redirect to login
+		// Requires login with role ROLE_USER or ROLE_ADMIN If not, it will redirect to
+		// login
 		http.authorizeRequests().antMatchers("/oauth2/**").permitAll().antMatchers("/login")//
 				.access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN','')");
 		// Pages only for ADMIN
-		http.authorizeRequests()
-				.antMatchers("/admin/showtimes/add","/admin/showtimes","/admin/showtimes/delete/{id}","/admin/showtimes/update/{id}").access("hasRole('ROLE_ADMIN')");
+		http.authorizeRequests().antMatchers("/admin/lichchieu/add", "/admin/lichchieu", "/admin/lichchieu/delete/{id}",
+				"/admin/lichchieu/update/{id}").access("hasRole('ROLE_ADMIN')");
 
 		http.authorizeRequests().antMatchers("/registration**", "/js/**", "/css/**", "/img/**").permitAll().anyRequest()
 				.authenticated().and().formLogin().loginPage("/login").permitAll().and().logout()
