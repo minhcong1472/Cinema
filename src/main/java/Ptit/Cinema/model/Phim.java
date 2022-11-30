@@ -31,5 +31,6 @@ public class Phim {
 	private String tenanh;
 	
 	private Time thoiluong;
-	
+
+
 }

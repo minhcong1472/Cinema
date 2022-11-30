@@ -92,11 +92,12 @@
 
 						<td th:text="${lichchieu.phim.ten}"></td>
 						<td th:text="${lichchieu.phong.ten}"></td>
-						<td><img src="" height="100px" width="130px"
+						<td><img src="" height="108px" width="130px"
 							th:src="@{${'/movieImages/' + lichchieu.phim.tenanh}}"></td>
 						<td th:text="${lichchieu.thoigianchieu}"></td>
 						<td th:text="${lichchieu.thoigianketthuc}"></td>
 						<td th:text="${lichchieu.giave}"></td>
+<!-- 						<td ><input type="checkbox" th:checked="${lichchieu.giave}"></td> -->
 
 						<td><a href=""
 							th:href="@{/admin/lichchieu/delete/{id}(id=${lichchieu.id})}"

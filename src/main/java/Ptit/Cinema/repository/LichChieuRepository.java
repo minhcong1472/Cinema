@@ -21,4 +21,12 @@ public interface LichChieuRepository extends JpaRepository<LichChieu, Integer> {
 			+ "OR (l.thoigianchieu > :start AND l.thoigianketthuc <:end))", nativeQuery = true)
 	public Optional<List<LichChieu>> findLichChieuByRoomAndTimeStartOrTimeEnd(int room_id, Timestamp start,
 			Timestamp end);
+	
+	
+//	@Query(value = "SELECT * FROM LichChieu l WHERE l.phong_id =:room_id "
+//			+ "AND l.phim_id =:movie_id "
+//			+ "AND ((l.thoigianchieu <= :start AND l.thoigianketthuc >=:start) OR (l.thoigianchieu <= :end AND l.thoigianketthuc >= :end) "
+//			+ "OR (l.thoigianchieu > :start AND l.thoigianketthuc <:end))", nativeQuery = true)
+//	public Optional<List<LichChieu>> findLichChieuByRoomAndMovieAndTimeStartOrTimeEnd(int movie_id,int room_id, Timestamp start,
+//			Timestamp end);
 }

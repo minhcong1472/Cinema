@@ -28,7 +28,7 @@ private NhanVienRepository nvRepository;
 		if(nv == null) {
 			throw new UsernameNotFoundException("Sai tên tài khoản hoặc mật khẩu.");
 		}
-		return new org.springframework.security.core.userdetails.User(nv.getEmail(), nv.getPassword(), mapRolesToAuthorities(nv.getRoles()));		
+		return new org.springframework.security.core.userdetails.User(nv.getEmail(), nv.getPassword(), mapRolesToAuthorities(nv.getRoles()));
 	}
 	
 	private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<ChucVu> chucvus){
