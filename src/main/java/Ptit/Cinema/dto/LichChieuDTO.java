@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 public class LichChieuDTO {
 
-	private int id;
+	private Integer id;
 
 	private double giave;
 

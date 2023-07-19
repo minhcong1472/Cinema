@@ -61,6 +61,16 @@ public class AdminController {
         return "GDLichChieu";
     }
 
+    @GetMapping("admin/lichchieu/add")
+    public String addLichChieuPage(Model model){
+        LichChieuDTO lichChieuDTO = new LichChieuDTO();
+        model.addAttribute("phims", phimService.getAllMovie());
+        model.addAttribute("phongs", phongService.getAllRoom());
+        model.addAttribute("lichChieuDTO", lichChieuDTO);
+
+        return "GDThemLichChieu";
+    }
+
     @GetMapping("/admin/lichchieu/delete/{id}")
     public String deleteLichChieu(@PathVariable int id, RedirectAttributes redirect) {
         Optional<LichChieu> lichChieu = lichchieuService.getLichChieuTheoId(id);
@@ -93,8 +103,12 @@ public class AdminController {
         return "GDSuaLichChieu";
     }
 
-    @PostMapping("/admin/lichchieu/add")
+    @PostMapping("/admin/lichchieu/save")
     public String saveLichChieu(@ModelAttribute("lichChieuDTO") LichChieuDTO lichChieuDTO, Model model, RedirectAttributes redirect) {
+        if(lichChieuDTO.getId() == null){
+            lichChieuDTO.setId(0);
+        }
+
         Optional<LichChieu> lichchieucu = lichchieuService.getLichChieuTheoId(lichChieuDTO.getId());
 
         LichChieu lichchieu = new LichChieu();
@@ -105,9 +119,11 @@ public class AdminController {
         lichchieu.setThoigianchieu(lichChieuDTO.getThoigianchieu());
         lichchieu.setThoigianketthuc(lichChieuDTO.getThoigianketthuc());
 
-        if ((lichchieucu.get()).equals(lichchieu)) {
-            model.addAttribute("update_notchange", "Thông tin lịch chiếu chưa có gì thay đổi");
-            return getLichChieuTheoID(lichChieuDTO.getId(), model, redirect);
+        if(lichchieucu.isPresent()){
+            if ((lichchieucu.get()).equals(lichchieu)) {
+                model.addAttribute("update_notchange", "Thông tin lịch chiếu chưa có gì thay đổi");
+                return getLichChieuTheoID(lichChieuDTO.getId(), model, redirect);
+            }
         }
 
         Timestamp batdau = lichChieuDTO.getThoigianchieu();
@@ -127,10 +143,16 @@ public class AdminController {
         // or !(lichchieuTonTai.get()).isEmpty
         if ((!(lichchieuTonTai.get()).isEmpty()) && lichChieuDTO.getId() != ((lichchieuTonTai.get()).get(0).getId())) {
             model.addAttribute("update_fail2", "Phòng đang được sử dụng");
+            if(lichChieuDTO.getId() == 0){
+                return addLichChieuPage(model);
+            }
             return getLichChieuTheoID(lichChieuDTO.getId(), model, redirect);
         }
         lichchieuService.LuuCapNhat(lichchieu);
-        redirect.addFlashAttribute("update_success", "Thay đổi thông tin lịch chiếu thành công");
+        if(lichChieuDTO.getId() == 0){
+            redirect.addFlashAttribute("update_success", "Thêm mới lịch chiếu thành công");
+        }
+        redirect.addFlashAttribute("update_success", "Cập nhật thông tin lịch chiếu thành công");
         return "redirect:/admin/lichchieu";
     }
 
